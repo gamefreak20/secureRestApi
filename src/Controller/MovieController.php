@@ -38,8 +38,12 @@ class MovieController extends FOSRestController
     {
         $movie = new Movie();
         $form = $this->createForm(MovieType::class, $movie);
-        $data = json_decode($request->getContent(), true);
+        $data = [
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+        ];
         $form->submit($data);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($movie);
@@ -47,5 +51,15 @@ class MovieController extends FOSRestController
             return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
         }
         return $this->handleView($this->view($form->getErrors()));
+
+        /*
+        $entityManager = $this->getDoctrine()->getManager();
+        $movie = new Movie();
+        $movie->setName($request->get('name'));
+        $movie->setDescription($request->get('description'));
+        $entityManager->persist($movie);
+        $entityManager->flush();
+        return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
+        */
     }
 }
