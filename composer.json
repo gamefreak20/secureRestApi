@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "friendsofsymfony/rest-bundle": "^2.5",
+        "friendsofsymfony/user-bundle": "^2.1",
         "jms/serializer-bundle": "^3.3",
         "sensio/framework-extra-bundle": "^5.3",
         "symfony/asset": "4.2.*",
